@@ -20,7 +20,7 @@ class List extends Component {
             changeTxt:'', //编辑弹窗中输入改变的内容
         }
     }
-    showModal = (item,index) => {
+    showModal = (item,index) => { //任务修改弹框出现
         //console.log(item)
         this.setState({
           visible: true,
@@ -28,7 +28,7 @@ class List extends Component {
           index:index
         });
       }
-    handleOk = () => {
+    handleOk = () => { //点击完成后修改任务内容
         this.setState({ loading: true });
         setTimeout(() => {
             //console.log(this.state.changeTxt)
@@ -36,13 +36,13 @@ class List extends Component {
             this.setState({ loading: false, visible: false, changeTxt:'' });
         }, 100);
     }
-    handleCancel = () => {
+    handleCancel = () => {  //任务修改框点击取消隐藏
         this.setState({ visible: false });
     }
-    onChangeTxt = (e) => {
+    onChangeTxt = (e) => { //实时更改任务修改弹框中更改任务内容的input的内容
         this.setState({ changeTxt: e.target.value });
     }
-    finish(e){
+    finish(e){  //完成该项任务内容操作
         const target= e.target || e.srcElement
         //console.log(this.state.list[target.parentNode.getAttribute('index')])
         let item=this.state.list[target.parentNode.getAttribute('index')]
@@ -61,7 +61,7 @@ class List extends Component {
 			})
         }
     }
-    delete(i){
+    delete(i){ //删除该项任务内容操作
         //console.log(index)
         const that=this
         this.state.list=this.state.list.filter(function(item,index){
@@ -80,14 +80,14 @@ class List extends Component {
             finish:this.state.finish
         })
     }
-    change(list){
+    change(list){  //增加组件中需要用到的增加列表内容的函数
         //console.log(list)
         this.setState({
             list:list,
             searchList:[]
         })
     }
-    search(){
+    search(){  //搜索功能
         if(this.refs.txt.value===''){
             alert('请输入内容再搜索')
         }else{
@@ -117,7 +117,7 @@ class List extends Component {
         //console.log(this.state.searchList)
 
     }
-    reset(){
+    reset(){ //重置搜索功能
         this.setState({
             searchList:[]
         }) 
@@ -125,7 +125,7 @@ class List extends Component {
     }
     componentDidMount(){
         const that=this
-        this.refs.txt.onkeydown=function(ev){
+        this.refs.txt.onkeydown=function(ev){ //当focus搜索框时按enter键直接触发搜索功能
             if(ev.keyCode===13){
                 that.search()
             }
@@ -156,7 +156,7 @@ class List extends Component {
                         </ul>
                         <Modal  
                                 visible={visible}
-                                title="Title"
+                                title="任务内容修改"
                                 onOk={this.handleOk}
                                 onCancel={this.handleCancel}
                                 footer={[
