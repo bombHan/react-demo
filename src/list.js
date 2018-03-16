@@ -107,13 +107,14 @@ class List extends Component {
                 }
                 return flag
             })
+            if(this.state.searchList.length===0){
+                alert('无搜索结果！')
+            }
         }
         this.setState({
             searchList:this.state.searchList
         })
-        if(this.state.searchList.length===0){
-            alert('无搜索结果！')
-        }
+
         //console.log(this.state.searchList)
 
     }
@@ -130,7 +131,7 @@ class List extends Component {
                 that.search()
             }
         }
-        
+       //console.log(window.location) 
     }
 
     render() {
